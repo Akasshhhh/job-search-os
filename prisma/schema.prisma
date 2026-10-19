@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../data/jobs.db"
+}
+
+model Job {
+  id                     String   @id
+  title                  String
+  company                String?
+  jobLocation            String?  @map("job_location")
+  employmentCountry      String   @default("India") @map("employment_country")
+  workplaceType          String   @map("workplace_type")
+  employmentType         String?  @map("employment_type")
+  seniorityLevel         String?  @map("seniority_level")
+  sponsorship            String   @default("unknown")
+  sponsorshipEvidence    String?  @map("sponsorship_evidence")
+  experienceRequirements Json     @map("experience_requirements")
+  skills                 Json
+  responsibilities       Json
+  compensation           String?
+  applicationUrl         String?  @map("application_url")
+  sourceUrl              String?  @map("source_url")
+  sourceType             String   @map("source_type")
+  rawDescription         String   @map("raw_description")
+  createdAt              DateTime @map("created_at")
+  provider               String
+
+  @@index([createdAt])
+  @@map("jobs")
+}
